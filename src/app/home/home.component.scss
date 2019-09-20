@@ -1,0 +1,18 @@
+@import '../../variables';
+
+.landing-img {
+  width: 100vw;
+  background-image: url("/assets/img/landing-home.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 350px;
+}
+
+.text-image-section{
+  color: $white;
+}
+
+section:nth-child(2n+1) {
+  background-color: $grey1;
+}

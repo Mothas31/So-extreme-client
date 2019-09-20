@@ -1,0 +1,11 @@
+<header class="w-100">
+  <app-header className="mb-5"></app-header>
+</header>
+<div class="container-fluid px-0">
+  <div [ngClass]="{'expanded': activate }">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<footer class="px-3 justify-content-end">
+  <app-footer></app-footer>
+</footer>

@@ -1,0 +1,88 @@
+@import '../../variables';
+
+#logo {
+  height: 55px;
+  padding: 10px 0 10px 0;
+}
+
+#header-profile{
+  float: right;
+  height: 55px;
+  display: flex;
+  align-items: center;
+
+  &>*{
+    vertical-align: middle;
+    text-align: center;
+    transition: .5s;
+  }
+
+  .hoverable:hover{
+    cursor: pointer;
+    color: $primary3;
+
+    &>*{
+      color: $primary3;
+    }
+  }
+
+  .menu-text{
+    width: auto;
+    font-size: $text-menu-size;
+  }
+
+  
+  img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 0;
+  }
+
+  .menu-item{
+    color: $primary2;
+    vertical-align: middle;
+    margin: 0 auto;
+  }
+}
+
+
+@include media-breakpoint-up(md) {
+  .expanded{
+    margin-left: 150px !important;
+  }
+
+  .fixed {
+    left: 75px !important;
+
+    &.expanded{
+      left: 75px !important;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .expanded{
+    margin-left: 0px;
+  }
+
+  .fixed {
+    margin-left: 0px;
+    left: 0px;
+
+    &.expanded{
+      margin-left: 150px !important;
+    }
+  } 
+}
+
+@include media-breakpoint-down(sm){
+  .chatBox{
+    width: 100vw;
+  }
+  
+  .notifBox{
+    width: 100vw;
+  }
+}

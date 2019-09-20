@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-6 col-12">
+    <h4 class="pb-2 pt-3">Inscrivez-vous pour rester informer</h4>
+    <div class="d-flex">
+      <div class="w-100">
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Entrez votre adresse email">
+        </mat-form-field>
+      </div>
+      <div class="px-3 d-flex align-items-center">
+        <button mat-raised-button color="warn">S'inscrire</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-6 d-flex flex-column">
+    <h4 class="pb-2 pt-3">A PROPOS</h4>
+    <a [routerLink]="[ '/who-are-we' ]">Qui sommes-nous?</a>
+    <a [routerLink]="[ '/how-it-work' ]">Comment ça marche?</a>
+    <a [routerLink]="[ '/contact-us' ]">Nous contacter</a>
+    <a [routerLink]="[ '/partenership' ]">Partenaires</a>
+  </div>
+  <div class="col-md-3 col-6 d-flex flex-column">
+    <h4 class="text-right pb-2 pt-3">SERVICE CLIENT</h4>
+    <a [routerLink]="[ '/legal-notice' ]" class="text-right">Mentions légales</a>
+    <a [routerLink]="[ '/cancellation-policy' ]" class="text-right">Politique d'annulation</a>
+    <a [routerLink]="[ '/terms' ]" class="text-right">Conditions générales</a>
+    <a [routerLink]="[ '/privacy-policy' ]" class="text-right">Charte de confidentialité</a>
+  </div>
+</div>
+<div class="row d-flex justify-content-between py-3">
+  <div class="col-6">
+    <a class="pr-2">Facebook</a>
+    <a class="px-2">Twitter</a>
+    <a class="px-2">LinkedIn</a>
+    <a class="px-2">Google+</a>
+  </div>
+  <p class="col-6 text-right">© 2019 So'Extreme</p>
+</div>

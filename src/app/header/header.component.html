@@ -1,0 +1,91 @@
+<!-- <header class="headershow-container {{className}} px-md-4" [ngClass]="{'expanded': triggerMenu, 'fixed': scrolled}">
+  <div class="headershow d-flex align-items-center justify-content-between">
+    <div>
+      <button class="ml-2 d-inline-block d-sm-inline-block d-md-none" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <a *ngIf="userType" class="d-none d-sm-inline-block" [routerLink]="[ '/' ]"><img id="logo" src="assets/img/logoSE.png"/></a>
+      <a *ngIf="!userType" [routerLink]="[ '/' ]"><img id="logo" src="assets/img/logoSE.png"/></a>
+    </div>
+    <mat-menu #menu="matMenu">
+      <a class="d-flex d-sm-none justify-content-center" [routerLink]="[ '/' ]"><img id="logo" src="assets/img/logoSE.png"/></a>
+      <button mat-menu-item [routerLink]="[ '/dashboard' ]" class="menu-item">
+        <mat-icon class="mr-4">home</mat-icon>
+        <span class="menu-item-name">TABLEAU DE BORD</span>
+      </button>
+      <button mat-menu-item *ngIf="!userPicture" (click)="register()" class="menu-item">
+        <mat-icon class="mr-4">fiber_new</mat-icon>
+        <span class="menu-item-name">INSCRIPTION</span>
+      </button>
+      <button mat-menu-item *ngIf="!userPicture" (click)="connect()" class="menu-item">
+        <mat-icon class="mr-4">meeting_room</mat-icon>
+        <span class="menu-item-name">CONNEXION</span>
+      </button>
+      <button mat-menu-item *ngIf="userPicture" (click)="disconnect()" class="menu-item">
+        <mat-icon class="mr-4">no_meeting_room</mat-icon>
+        <span class="menu-item-name">SE DECONNECTER</span>
+      </button>
+    </mat-menu>
+    <span id="header-profile">
+      <span *ngIf="userPicture && lockMenu" [routerLink]="[ '/profil' ]" class="menu-text hoverable px-3 d-none d-sm-none d-md-block">PROFIL</span>
+      <span *ngIf="!userPicture && lockMenu && !hideMenu" (click)="register()" class="menu-text hoverable px-3 d-none d-sm-none d-md-block">INSCRIPTION</span>
+      <span *ngIf="!userPicture && lockMenu && !hideMenu" (click)="connect()" class="menu-text hoverable px-3 d-none d-sm-none d-md-block">CONNEXION</span>
+      <span *ngIf="userPicture && lockMenu" (click)="disconnect()" class="menu-text hoverable px-3 d-none d-sm-none d-md-block">DECONNEXION</span>
+      <div  class="user-avatar">
+        <img *ngIf="userPicture && lockMenu" class="mx-3" src="{{userPicture}}"/>
+      </div>
+    </span>
+  </div>
+</header>
+<header class="headershow-placeholder {{className}}" [ngClass]="{'expanded': triggerMenu, 'showed': scrolled}">
+
+</header>
+
+<div class="central-loader" *ngIf="deconnectMessage">
+  <div class="d-flex w-100 flex-column justify-content-center align-items-center">
+    <mat-spinner></mat-spinner>
+    <p class="py-3">Vous allez être redirigé, veuillez patienter.</p>
+  </div>
+</div> -->
+
+<mat-toolbar class="w-100 justify-content-between" role="heading">
+  <div>
+    <button class="ml-2 d-inline-block d-sm-inline-block d-md-none" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <a *ngIf="userType" class="d-none d-sm-inline-block" [routerLink]="[ '/' ]"><img id="logo" src="assets/img/logoSE.png" /></a>
+    <a *ngIf="!userType" [routerLink]="[ '/' ]"><img id="logo" src="assets/img/logoSE.png" /></a>
+  </div>
+  <!-- Vertical Menu if width small -->
+  <mat-menu #menu="matMenu">
+    <a class="d-flex d-sm-none justify-content-center" [routerLink]="[ '/' ]"><img id="logo" src="assets/img/logoSE.png" /></a>
+    <button mat-menu-item [routerLink]="[ '/dashboard' ]" class="menu-item">
+      <mat-icon class="mr-4">home</mat-icon>
+      <span class="menu-item-name">TABLEAU DE BORD</span>
+    </button>
+    <button mat-menu-item *ngIf="!userPicture" (click)="register()" class="menu-item">
+      <mat-icon class="mr-4">fiber_new</mat-icon>
+      <span class="menu-item-name">INSCRIPTION</span>
+    </button>
+    <button mat-menu-item *ngIf="!userPicture" (click)="connect()" class="menu-item">
+      <mat-icon class="mr-4">meeting_room</mat-icon>
+      <span class="menu-item-name">CONNEXION</span>
+    </button>
+    <button mat-menu-item *ngIf="userPicture" (click)="disconnect()" class="menu-item">
+      <mat-icon class="mr-4">no_meeting_room</mat-icon>
+      <span class="menu-item-name">DECONNECTION</span>
+    </button>
+  </mat-menu>
+  <!-- Horizontal Menu if width large -->
+  <span id="header-profile">
+      <span [routerLink]="[ '/activity' ]" class="menu-text hoverable px-2 d-none d-sm-none d-md-block">ACTIVITES</span>
+      <span *ngIf="userPicture && lockMenu" [routerLink]="[ '/profil' ]" class="menu-text hoverable px-2 d-none d-sm-none d-md-block">PROFIL</span>
+      <span *ngIf="!userPicture && lockMenu && !hideMenu" (click)="register()" class="menu-text hoverable px-2 d-none d-sm-none d-md-block">INSCRIPTION</span>
+      <span *ngIf="!userPicture && lockMenu && !hideMenu" (click)="connect()" class="menu-text hoverable px-2 d-none d-sm-none d-md-block">CONNEXION</span>
+      <span *ngIf="userPicture && lockMenu" (click)="disconnect()" class="menu-text hoverable px-2 d-none d-sm-none d-md-block">DECONNEXION</span>
+      <div  class="user-avatar">
+        <img *ngIf="userPicture && lockMenu" class="mx-3" src="{{userPicture}}"/>
+      </div>
+      <span [routerLink]="[ '/' ]" class="menu-text hoverable px-2 d-none d-sm-none d-md-block"><mat-icon matBadge="2" matBadgeColor="warn">shopping_cart</mat-icon></span>
+    </span>
+</mat-toolbar>

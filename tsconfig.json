@@ -1,0 +1,47 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "consultation": [
+        "dist/consultation"
+      ],
+      "consultation/*": [
+        "dist/consultation/*"
+      ],
+      "ngx-context": [
+        "dist/ngx-context"
+      ],
+      "ngx-context/*": [
+        "dist/ngx-context/*"
+      ],
+      "ngx-context-test": [
+        "dist/ngx-context-test"
+      ],
+      "ngx-context-test/*": [
+        "dist/ngx-context-test/*"
+      ],
+      "ngx-consultation": [
+        "dist/ngx-consultation"
+      ],
+      "ngx-consultation/*": [
+        "dist/ngx-consultation/*"
+      ]
+    }
+  }
+}

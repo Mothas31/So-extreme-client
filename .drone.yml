@@ -1,0 +1,87 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: sonarqube-analyse
+    image: docker
+    commands:
+      - docker build --file docker/test/Dockerfile .
+    volumes:
+    - name: docker
+      path: /var/run/docker.sock
+
+  - name: clone-server
+    image: docker:git
+    commands:
+      - git clone --depth 1 -b master http://$GIT_USERNAME:$GIT_PASSWORD@git.nside.local.com/Night/workflowSrv.git
+    environment:
+      GIT_USERNAME:
+        from_secret: git_username
+      GIT_PASSWORD:
+        from_secret: git_password
+
+  - name: build-docker-images
+    image: docker
+    commands:
+        - echo $DOCKER_PASSWORD | docker login internalrepo-nexus.nside.local.com -u $DOCKER_USERNAME --password-stdin
+        - docker build -t internalrepo-nexus.nside.local.com/soExtrem-client:latest --file docker/build/Dockerfile .
+    volumes:
+    - name: docker
+      path: /var/run/docker.sock
+    environment:
+      DOCKER_USERNAME:
+        from_secret: docker_username
+      DOCKER_PASSWORD:
+        from_secret: docker_password
+
+  - name: push-to-nexus
+    image: docker
+    commands:
+        - echo $DOCKER_PASSWORD | docker login internalrepo-nexus.nside.local.com -u $DOCKER_USERNAME --password-stdin
+        - docker push internalrepo-nexus.nside.local.com/soExtrem-client:latest
+    volumes:
+    - name: docker
+      path: /var/run/docker.sock
+    environment:
+      DOCKER_USERNAME:
+        from_secret: docker_username
+      DOCKER_PASSWORD:
+        from_secret: docker_password
+  
+  - name: clone-ansible-deployer
+    image: docker:git
+    commands:
+      - git clone --depth 1 -b master http://$GIT_USERNAME:$GIT_PASSWORD@git.nside.local.com/Night/platform.git
+    environment:
+      GIT_USERNAME:
+        from_secret: git_username
+      GIT_PASSWORD:
+        from_secret: git_password
+
+  - name: deploy-from-nexus
+    image: williamyeh/ansible:ubuntu16.04
+    volumes:
+    - name: ssh
+      path: /.ssh
+    commands:
+      - export $VAULT_PASS > .vault_password.txt
+      - ssh -o StrictHostKeyChecking=no -i /.ssh/id_rsa -T night@workflow.nside.local.com
+      - ansible-playbook -i $PATH_ANSIBLE/ifr_ovh/inventory.ini $PATH_ANSIBLE/deployments/deploysoExtrem-client.yml -e 'host_key_checking=False' --private-key=/.ssh/id_rsa --extra-vars "role_path=$PATH_ANSIBLE/roles ansible_sudo_pass=$SUDO_PASS service_password=$DOCKER_PASSWORD" -vvv
+    environment:
+      DOCKER_USERNAME:
+        from_secret: docker_username
+      DOCKER_PASSWORD:
+        from_secret: docker_password
+      PATH_ANSIBLE:
+        from_secret: path_ansible
+      VAULT_PASS:
+        from_secret: vault_pass
+      SUDO_PASS:
+        from_secret: sudo_pass
+volumes:
+- name: docker
+  host:
+    path: /var/run/docker.sock
+- name: ssh
+  host:
+    path: /home/night/.ssh
